@@ -1,0 +1,299 @@
+
+body {
+  background-image: url('images/bay-beach-boats-1266768.jpg');
+  background-size: cover;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+nav {
+  padding: 0;
+  margin: 0;
+  height: 45px;
+  line-height: 45px;
+  background: rgba(204, 153, 153, 0.3) !important;
+  border-style: none !important;
+}
+
+nav li {
+  float: left;
+  width: 25%;
+  height: 45px;
+  line-height: 45px;
+  list-style: none;
+}
+
+nav li a {
+  display: inline-block;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  font-size: 16px;
+  color: #c81623;
+}
+
+nav li a:hover {
+  color: #ffffff;
+}
+
+#music {
+  margin: 45px 0 0 0 !important;
+  height: 30px;
+  line-height: 30px;
+}
+
+#music #media {
+  vertical-align: top;
+  padding: 0 10px 0 10px;
+  height: 40px;
+}
+
+#music div {
+  display: inline-block;
+  padding: 2px 0 2px 0;
+}
+
+#music #song {
+  width: 60%;
+  margin-left: 5%;
+}
+
+
+#music #songSr {
+  padding: 0;
+  margin: 0;
+  width: 50px;
+  border-radius: 10px;
+  background-color: #EED5D2;
+  outline: none;
+}
+
+
+#cover {
+  position: relative;
+  height: 100vh !important;
+}
+
+#hello div {
+  position: absolute;
+  font-size: 6vw;
+  text-align: center;
+  height: 7vw;
+  width: 60vw;
+  margin-left: 20vw;
+  margin-top: 35vh;
+  opacity: 0.2;
+  transition: all 0.5s ease 0s;
+  color: #c81623;
+}
+
+#hello div:hover {
+  opacity: 1;
+  font-size: 6vw;
+  text-shadow: 2px 2px 2px #8B6969;
+}
+
+#info {
+  padding-top: 15vh;
+  padding-bottom: 15vh;
+}
+
+#info .box {
+  width: 80vw;
+  height: 70vh;
+  margin: 0 10vw 0 10vw;
+  background-color: rgba(205, 255, 199, 0.54);
+  font-size: 16px;
+}
+
+
+#demo {
+  position: relative;
+  height: 60vw;
+  overflow: hidden;
+}
+
+#demo ul {
+  position: relative;
+  padding: 0;
+  height: 30vw;
+}
+
+#demo ul li {
+  position: absolute;
+  display: inline-block;
+  list-style: none;
+  background-color: rgba(205, 255, 199, 0.54);
+  height: 20vw;
+  width: 20vw;
+  border-radius: 20vw;
+  text-align: center;
+  line-height: 20vw;
+  font-size: 2vw;
+}
+
+#demo li:nth-child(1) {
+  left: 5vw;
+  top: 5vw;
+  animation: 3s change1 infinite;
+}
+
+/*@keyframes change1 {*/
+/*  33% {*/
+/*    left: 6vw;*/
+/*    top: 6vw }*/
+/*  66%{*/
+/*    left: 4vw;*/
+/*    top: 6vw*/
+/*  }*/
+/*  to {*/
+/*    left: 5vw;*/
+/*    top: 5vw; }*/
+/*}*/
+
+#demo li:nth-child(2) {
+  left: 28vw;
+  top: 5vw;
+  animation: 4s change2 infinite;
+}
+
+/*@keyframes change2 {*/
+/*  33% {*/
+/*    left: 25vw;*/
+/*    top: 7vw }*/
+/*  66%{*/
+/*    left: 32vw;*/
+/*    top: 8vw*/
+/*  }*/
+/*  to {*/
+/*    left: 28vw;*/
+/*    top: 5vw; }*/
+/*}*/
+
+#demo li:nth-child(3) {
+  right: 28vw;
+  top: 5vw;
+  animation: 4s change3 infinite;
+}
+
+/*@keyframes change3 {*/
+/*  33% {*/
+/*    right: 25vw;*/
+/*    top: 3vw;}*/
+/*  66%{*/
+/*    right: 26vw;*/
+/*    top: 7vw;*/
+/*  }*/
+/*  to {*/
+/*    right: 28vw;*/
+/*    top: 5vw; }*/
+/*}*/
+
+#demo li:nth-child(4) {
+  right: 5vw;
+  top: 5vw;
+  animation: 4s change4 infinite;
+}
+
+/*@keyframes change4 {*/
+/*  33% {*/
+/*    right: 6vw;*/
+/*    top: 8vw;}*/
+/*  66%{*/
+/*    right: 2vw;*/
+/*    top: 4vw;*/
+/*  }*/
+/*  to {*/
+/*    right: 5vw;*/
+/*    top: 5vw; }*/
+/*}*/
+
+#demo ul li a {
+  display: inline-block;
+  color: rgba(200, 63, 22, 0.96);
+}
+
+
+#demo span {
+  position: absolute;
+  display: block;
+  height: 30px;
+  margin-top: 12%;
+  font-size: 2.5vw;
+}
+
+#demo span a {
+  color: white;
+}
+
+#demo span a:hover {
+  color: #FFA07A;
+}
+
+#skillsBox {
+  position: relative;
+  height: 30vw;
+  font-family: "Adobe Hebrew";
+}
+
+/*技能skills*/
+#j, #h, #c {
+  position: absolute;
+  width: 40vw;
+  height: 20vw;
+}
+
+#j {
+  left: 0;
+}
+
+#h {
+  left: 30vw;
+}
+
+#c {
+  left: 60vw;
+}
+
+
+#js, #html, #css {
+  cursor: pointer;
+  position: absolute;
+  width: 15vw;
+  height: 18vw;
+  text-align: center;
+  line-height: 18vw;
+  font-size: 5vw;
+  color: #ffffff;
+}
+
+#js {
+  left: 12vw;
+
+}
+
+#html {
+  left: 42vw;
+}
+
+#css {
+  left: 72vw;
+}
+
+#skillsBox ul {
+  display: none;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 3.5vw;
+  color: white;
+  text-align: center;
+}
+
+#skillsBox ul li {
+  height: 6vw;
+  line-height: 6vw;
+}

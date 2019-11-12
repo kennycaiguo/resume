@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>blog</title>
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top container-fluid">
+  <div class="row">
+    <ul class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <li><a href="#cover">封面</a></li>
+      <li><a href="#info">基本信息</a></li>
+      <li><a href="#demo">demo</a></li>
+      <li><a href="#skills">技能</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!--封面-->
+<div id="cover">
+  <!--音乐部分-->
+  <div id="music" class="row container-fluid">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+      <input id='song' type="text" placeholder="听点什么">
+      <button id="songSr">搜歌</button>
+    </div>
+    <audio controls="" autoplay="" id="media" class="col-lg-3 col-md-3 col-sm-6 col-xs-6"
+           src="http://music.163.com/song/media/outer/url?id=381849.mp3">
+    </audio>
+  </div>
+  <!--  封面词-->
+  <div id="hello">
+    <div>Hello, I am Norina.</div>
+  </div>
+</div>
+
+<!--主要内容部分-->
+<main style="display: block">
+
+  <!--  info基本信息-->
+  <div id="info">
+    <div class="box">
+      <section class="text-center">
+        <h3>个人信息</h3>
+        <p>
+          姓名：徐云诺<br/>
+          毕业学校：广东外语外贸大学<br/>
+          手机：180********
+        </p>
+      </section>
+      <section class="text-center">
+        <h3>自我评价</h3>
+        <p>
+          1. 有较强的学习及适应能力，敢于尝试。<br/>
+          2. 有良好的沟通能力。<br/>
+          3. 责任心、执行力强。
+        </p>
+      </section>
+    </div>
+
+  </div>
+
+  <!--  demo部分-->
+  <div id="demo">
+    <ul>
+      <li><a href="https://github.com/xxxxxyn/myRepository">贪吃蛇微信小程序</a></li>
+      <li><a href="lbt/lunbo.html">轮播图</a></li>
+      <li><a href="magnifier/magnifier.html">图片放大镜</a></li>
+      <li><a href="digitClock/index.html">canvas数字时钟</a></li>
+    </ul>
+    <span id="gh"><a href="github:https://github.com/xxxxxyn">github:https://github.com/xxxxxyn</a></span>
+  </div>
+
+
+  <!--  技能部分-->
+  <div id="skillsBox">
+    <canvas id="j"></canvas>
+    <canvas id="h"></canvas>
+    <canvas id="c"></canvas>
+    <div id="js">JS
+      <ul class="skill2">
+        <li>ES6</li>
+      </ul>
+    </div>
+    <div id="html">HTML
+      <ul class="skill2">
+        <li>html5</li>
+      </ul>
+    </div>
+    <div id="css">CSS
+      <ul class="skill2">
+        <li>bootstrap</li>
+        <li>flex</li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+<script src="jquery-3.3.1.js"></script>
+<script>
+  // 音乐
+  let songName;
+  let song = document.getElementById('song');
+  let video = document.getElementById('media');
+  document.getElementById('songSr').onclick = () => {
+    songName = song.value;
+    let get = new XMLHttpRequest();
+    get.open('GET', 'https://api.apiopen.top/searchMusic?name=' + songName)
+    get.send(null);
+    get.onreadystatechange = function () {
+      if (this.readyState === 4) {
+        var result = JSON.parse(this.response).result[0].url;
+        console.log(result);
+        video.setAttribute('src', result)
+      }
+    };
+  };
+
+  //demo
+  //demo移动到上面就放大且把其他没选中的变透明，出来就恢复
+  $("#demo ul li").mouseenter(function () {
+    $(this)
+      .css({
+        "opacity": "1", 'transform': 'scale(1.2, 1.2)', '-webkit-transform': 'scale(1.2, 1.2)',
+        '-moz-transform': 'scale(1.2, 1.2)', '-o-transform': 'scale(1.2, 1.2)'
+      })
+      .siblings().css({
+      "opacity": "0.4", 'transform': 'scale(1, 1)', '-webkit-transform': 'scale(1, 1)',
+      '-moz-transform': 'scale(1, 1)', '-o-transform': 'scale(1, 1)'
+    });
+  });
+  $("#demo ul").mouseleave(function () {
+    $(this).find('li')
+      .css({
+        "opacity": "1", 'transform': 'scale(1, 1)', '-webkit-transform': 'scale(1, 1)',
+        '-moz-transform': 'scale(1, 1)', '-o-transform': 'scale(1, 1)'
+      });
+  });
+
+
+  //控制github地址从右往左移动出来
+  var width = document.body.clientWidth;
+  let demo = document.getElementById('demo');
+  let gh = document.getElementById('gh');
+  gh.style.left = '90vw';
+  setInterval(function () {
+    let demoS = demo.getBoundingClientRect();
+    console.log(demoS.top);
+    if (0 < demoS.top < 100) {
+      gh.style.left = '90vw';
+      gh.style.left = parseInt(gh.style.left) + demoS.top * 0.6 + 'vw'
+    } else if (demoS.top <= 0) {
+      gh.style.left = '90vw';
+      gh.style.left = parseInt(gh.style.left) - demoS.top * 0.6 + 'vw'
+    }
+  }, 100)
+
+
+  // 技能skills
+
+  const $sk = $("#skillsBox>div");
+  $sk.mouseenter(function () {
+    $(this).children("ul").show();
+  });
+
+  $sk.mouseleave(function () {
+    $(this).children("ul").hide();
+  });
+
+  //技能改成canvas
+  var js = document.getElementById('j');
+  var html = document.getElementById('h');
+  var css = document.getElementById('c');
+  var ctj = js.getContext('2d');
+  var cth = html.getContext('2d');
+  var ctc = css.getContext('2d');
+
+
+  drawBook(ctj, 'orange');
+  drawBook(cth, 'blue');
+  drawBook(ctc, 'green');
+
+  //画书本函数
+  function drawBook(ct, color) {
+    ct.beginPath();
+    ct.moveTo(200, 0);
+    ct.lineTo(200, 140);
+    ct.lineTo(100, 140);
+    ct.arcTo(90, 140, 90, 130, 10);
+    ct.lineTo(90, 10);
+    ct.arcTo(90, 0, 100, 0, 10);
+    ct.lineTo(190, 0);
+    ct.fillStyle = color;
+    ct.fill();
+    ct.strokeStyle = color;
+    ct.stroke();
+    ct.beginPath();
+    ct.rect(198, 122, -98, 16);
+    ct.fillStyle = 'white';
+    ct.fill();
+    ct.strokeStyle = 'white';
+    ct.beginPath();
+    ct.arc(100, 130, 8, 0, Math.PI * 2);
+    ct.fillStyle = 'white';
+    ct.fill();
+  }
+
+</script>
+
+</body>
+</html>
