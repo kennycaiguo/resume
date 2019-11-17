@@ -152,10 +152,7 @@
   };//这两组必须是一样的，不能一组是左右，一组是arr
 
   //右边的按钮
-  // right.onclick=function () {
-  //   alert("hhihhii")
-  // };测试得知不是这个按钮的问题，
-  right.onclick =arrHandle;//不需要写括号啊！！！！！！！！！！
+  right.onclick =arrHandle;
   function arrHandle() {
     if (pic == imgList.length - 1) {
       pic = 0;
@@ -163,17 +160,7 @@
     }
     pic++;//马上加1让它移动到第二张图片
     animate(ul, -pic * imgWidth);//pic从0的值加1之后,pic的值是1,然后ul移动出去一个图片
-    // if (pic == imgList.length - 1) {
-    //   //第五个按钮颜色干掉
-    //   liNum.children[liNum.children.length - 1].className = "";
-    //   //第一个按钮颜色设置上
-    //   liNum.children[0].className = "current";
-    // } else {
-    //   //干掉所有的小按钮的背景颜色
-    //   for (var i = 0; i < liNum.children.length; i++) {
-    //     liNum.children[i].removeAttribute("class");
-    //   }
-    //   liNum.children[pic].className = "current";
+
   }//先不考虑颜色问题
   //
   //左边按钮
@@ -188,14 +175,7 @@
     //如过不是在第一张那里点击这个左按钮，就直接减pic的值就可以移动一格
     pic--;
     animate(ul,-pic*imgWidth);
-    //   // animate(ulObj, -pic * imgWidth);
-    //   // //设置小按钮的颜色---所有的小按钮干掉颜色
-    //   // for (var i = 0; i < olObj.children.length; i++) {
-    //   //   olObj.children[i].removeAttribute("class");
-    //   // }
-    //   // //当前的pic索引对应的按钮设置颜色
-    //   // olObj.children[pic].className = "current";
-    //
+
   };
 
   function animate(element, target) {

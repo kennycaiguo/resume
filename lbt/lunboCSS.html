@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../jquery-3.3.1.js"></script>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  #inner {
+    position: relative;
+    height: 200px;
+    width: 400px;
+    overflow: hidden;
+  }
+
+  #inner .img {
+    height: 200px;
+    width: 1600px;
+    /*避免有缝隙*/
+    font-size: 0;
+    animation: sliders 4s linear infinite;
+  }
+
+  #inner .img li {
+    height: 200px;
+    width: 400px;
+    display: inline-block;
+  }
+
+  #inner .img:hover {
+    animation-play-state: paused;
+  }
+
+  /*每张图片5%停留时间*/
+  @keyframes sliders {
+    5% {
+      transform: translateX(0px);
+    }
+    33.3% {
+      transform: translateX(-400px);
+    }
+    38.3% {
+      transform: translateX(-400px);
+    }
+    66.6% {
+      transform: translateX(-800px);
+    }
+    71.6% {
+      transform: translateX(-800px);
+    }
+    100% {
+      transform: translateX(-1200px);
+    }
+
+  }
+
+  #inner #bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0;
+  }
+
+  #inner #bottom li {
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    height: 20px;
+    width: 20px;
+    color: white;
+    background-color: rgba(168, 168, 168, 0.57);
+  }
+
+</style>
+<body>
+<div id="box">
+  <div id="inner">
+    <ul class="img">
+      <li><img src="testImage/J2松鼠.jpg" alt=""></li>
+      <li><img src="testImage/j2.jpg" alt=""></li>
+      <li><img src="testImage/youngj2.jpg" alt=""></li>
+      <li><img src="testImage/J2松鼠.jpg" alt=""></li>
+    </ul>
+    <!--<ul id="bottom">-->
+      <!--<li>1</li>-->
+      <!--<li>2</li>-->
+      <!--<li>3</li>-->
+    <!--</ul>-->
+  </div>
+</div>
+</body>
+</html>
