@@ -19,7 +19,7 @@ nav {
 
 nav li {
   float: left;
-  width: 25%;
+  width: 20%;
   height: 45px;
   line-height: 45px;
   list-style: none;
@@ -39,38 +39,6 @@ nav li a:hover {
   color: #ffffff;
 }
 
-#music {
-  margin: 45px 0 0 0 !important;
-  height: 30px;
-  line-height: 30px;
-}
-
-#music #media {
-  vertical-align: top;
-  padding: 0 10px 0 10px;
-  height: 40px;
-}
-
-#music div {
-  display: inline-block;
-  padding: 2px 0 2px 0;
-}
-
-#music #song {
-  width: 60%;
-  margin-left: 5%;
-}
-
-
-#music #songSr {
-  padding: 0;
-  margin: 0;
-  width: 50px;
-  border-radius: 10px;
-  background-color: #EED5D2;
-  outline: none;
-}
-
 
 #cover {
   position: relative;
@@ -84,7 +52,7 @@ nav li a:hover {
   height: 7vw;
   width: 60vw;
   margin-left: 20vw;
-  margin-top: 35vh;
+  margin-top: 38vh;
   opacity: 0.2;
   transition: all 0.5s ease 0s;
   color: #c81623;
@@ -219,7 +187,7 @@ nav li a:hover {
   margin: 0;
   list-style: none;
   font-size: 3.5vw;
-  color: white;
+  color: #c81623;
   text-align: center;
 }
 

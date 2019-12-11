@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Message Board</title>
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<style>
+  #talk {
+    text-align: center;
+  }
+
+
+
+  #showBox {
+    font-size: 18px;
+    padding-top: 3vh;
+  }
+
+</style>
+<script src="jquery-3.3.1.js"></script>
+<body>
+<div id="talk">
+  <h1>留言板</h1>
+  <form id="form1">
+    用户：<input type="text" name="username"/><br/>
+    密码：<input type="password" name="pw"/><br/>
+    <button onclick="reg(event)">注册</button>
+    <button onclick="login(event)">登录</button>
+  </form>
+  <div>
+    <textarea id="talkBox" cols="30" rows="3" style="resize:none;vertical-align: bottom"></textarea>
+    <br/><button onclick="send()">发送</button>
+  </div>
+  <div id="showBox">
+  </div>
+</div>
+<script>
+  //一开始请求所有留言
+  $(document).ready(getData())
+
+
+  function reg(event) {
+
+    event.preventDefault();
+
+    $.ajax({
+      url: '/reg',
+      type: "POST",
+      dataType: 'json',
+      data: $('#form1').serialize(),
+      success: function (res) {
+        if (res["err"] == 0) {
+          alert('注册成功')
+        } else {
+          alert(res["msg"])
+        }
+      },
+      error: function () {
+        console.log('失败')
+      }
+    })
+  }
+
+
+  function login(event) {
+
+    event.preventDefault();
+
+    $.ajax({
+      url: '/login',
+      type: "POST",
+      dataType: 'json',
+      data: $('#form1').serialize(),
+      success: function (res) {
+        console.log(res)
+        if (res["err"] == 0) {
+          alert('登录成功，可以去留言了')
+          sessionStorage.setItem("username", res["username"]);
+        } else {
+          alert(res["msg"])
+        }
+      },
+      error: function (res) {
+        console.log(res)
+        console.log('失败')
+      }
+    })
+  }
+
+
+  function getData() {
+    $.ajax({
+      url: 'talks.json',
+      type: "GET",
+      dataType: "json",
+      success: function (res) {
+        console.log(res['talks'])
+        let talks = res['talks']
+        let showBox = document.getElementById('showBox')
+        for (let i = 0; i < res['talks'].length; i++) {
+          showBox.appendChild(document.createElement('div'))
+          // showBox.children[i].appendChild(document.createElement('p'))
+          showBox.children[i].innerText = talks[i]['name'] + ':' + talks[i]['comment']
+        }
+      },
+      error: function () {
+        console.log('请求评论页面失败')
+      }
+    });
+  }
+
+  function send() {
+
+    let username = sessionStorage.getItem('username')
+    if (!username) {
+      alert('请先登录')
+    } else {
+      let value = document.getElementById("talkBox").value
+      let json = {}
+
+      json['username'] = username
+      json['value'] = value
+      console.log(json)
+      $.ajax({
+        url: '/addTalk',
+        type: "POST",
+        dataType: 'json',
+        data: json,
+        success: function (res) {
+          console.log(res)
+          if (res["err"] == 0) {
+            alert('新加成功')
+            //更新数据
+            getData();
+          } else {
+            alert('添加评论失败')
+          }
+        },
+        error: function (res) {
+          console.log(res)
+        }
+      })
+
+
+    }
+
+  }
+</script>
+</body>
+</html>
