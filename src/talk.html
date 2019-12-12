@@ -103,7 +103,6 @@
         let showBox = document.getElementById('showBox')
         for (let i = 0; i < res['talks'].length; i++) {
           showBox.appendChild(document.createElement('div'))
-          // showBox.children[i].appendChild(document.createElement('p'))
           showBox.children[i].innerText = talks[i]['name'] + ':' + talks[i]['comment']
         }
       },
@@ -124,7 +123,7 @@
 
       json['username'] = username
       json['value'] = value
-      console.log(json)
+
       $.ajax({
         url: '/addTalk',
         type: "POST",

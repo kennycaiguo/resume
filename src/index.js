@@ -1,11 +1,10 @@
-
 //留言
 function openTalk() {
   $.ajax({
     url: 'http://localhost:8080/talk',
     type: "GET",
     success: function (res) {
-      console.log(res,'ok')
+      console.log(res, 'ok')
     },
     error: function () {
       console.log('请求评论页面失败')
@@ -18,21 +17,17 @@ function openTalk() {
 //demo移动到上面就放大且把其他没选中的变透明，出来就恢复
 $("#demo ul li").mouseenter(function () {
   $(this)
-    .css({
-      "opacity": "1", 'transform': 'scale(1.2, 1.2)', '-webkit-transform': 'scale(1.2, 1.2)',
-      '-moz-transform': 'scale(1.2, 1.2)', '-o-transform': 'scale(1.2, 1.2)'
-    })
-    .siblings().css({
-    "opacity": "0.4", 'transform': 'scale(1, 1)', '-webkit-transform': 'scale(1, 1)',
-    '-moz-transform': 'scale(1, 1)', '-o-transform': 'scale(1, 1)'
-  });
+    .addClass("selected").removeClass("noselected")
+    .siblings().addClass("noselected").addClass("selected");
 });
 $("#demo ul").mouseleave(function () {
   $(this).find('li')
-    .css({
-      "opacity": "1", 'transform': 'scale(1, 1)', '-webkit-transform': 'scale(1, 1)',
-      '-moz-transform': 'scale(1, 1)', '-o-transform': 'scale(1, 1)'
-    });
+    .addClass("restore").removeClass("selected noselected")
+})
+
+$("#demo ul").mouseenter(function () {
+  $(this).find('li')
+    .removeClass("restore")
 });
 
 
@@ -72,6 +67,7 @@ var css = document.getElementById('c');
 var ctj = js.getContext('2d');
 var cth = html.getContext('2d');
 var ctc = css.getContext('2d');
+
 
 drawBook(ctj, 'orange');
 drawBook(cth, 'blue');

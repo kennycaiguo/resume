@@ -70,7 +70,7 @@ let server = http.createServer((req, res) => {
             }
             console.log('评论添加成功！！！！！！！');
             res.write('{"err": 0, "msg": "add success"}')
-            //记得加上end啊！
+            //记得加上end！
             res.end()
           })
 
@@ -80,7 +80,6 @@ let server = http.createServer((req, res) => {
         break;
 
       default: //其他资源请求(都是get)
-        if (req.url !== "/favicon.ico") {
           if (req.url !== '/') {
             //非主页
             fs.readFile(`src${req.url}`, (err, data) => {
@@ -105,7 +104,7 @@ let server = http.createServer((req, res) => {
             })
           }
 
-        }
+
 
     }
 
