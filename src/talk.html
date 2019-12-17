@@ -13,11 +13,116 @@
     text-align: center;
   }
 
+  .centerBox {
+    transform: translate(-50%, 0);
+    left: 50%;
+  }
 
+  #formR {
+    position: relative;
+    height: 82px;
+  }
+
+  .regBox {
+    display: inline-block;
+    width: 280px;
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+
+  }
+
+  #divP {
+    margin-top: 28px;
+  }
+
+  #formR p {
+    width: 250px;
+    margin-left: 530px;
+    color: #ff2c00;
+    display: inline-block !important;
+  }
+
+  #formR button {
+    display: block;
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    top: 56px;
+  }
+
+  .noPadding {
+    padding: 0;
+  }
+
+  .noCenter {
+    text-align: left;
+  }
+
+  .notShow {
+    visibility: hidden;
+  }
+
+  .show {
+    visibility: visible;
+  }
 
   #showBox {
     font-size: 18px;
     padding-top: 3vh;
+  }
+
+  /*给注册部分的响应式布局,宽度较小的时候p提示框在input下面*/
+  @media screen and (max-device-width: 782px) {
+
+    #talk {
+      position: relative;
+    }
+
+    #formR {
+      width: 280px;
+      position: absolute;
+      transform: translate(-50%, 0);
+      left: 50%;
+    }
+
+    .regBox {
+      display: block;
+      position: static;
+      width: 280px;
+      transform: translate(0, 0);
+      left: 0;
+    }
+
+    #divP {
+      margin-top: 0;
+    }
+
+    #formR p {
+      display: block !important;
+      width: 250px;
+      height: 20px;
+      margin: 0;
+      color: #ff2c00;
+      text-align: center;
+
+    }
+
+    #box2 {
+      position: absolute;
+      top: 170px;
+      transform: translate(-50%, 0);
+      left: 50%;
+    }
+
+    #formR button {
+      display: inline-block;
+      position: static;
+      transform: none;
+      left: 0;
+      top: 0;
+    }
+
   }
 
 </style>
@@ -25,17 +130,39 @@
 <body>
 <div id="talk">
   <h1>留言板</h1>
-  <form id="form1">
-    用户：<input type="text" name="username"/><br/>
-    密码：<input type="password" name="pw"/><br/>
-    <button onclick="reg(event)">注册</button>
+  <form id="formR" style="display: none">
+    <div class="regBox" id="divN">
+      <label for="nameReg">用户：</label>
+      <input type="text" name="username" id="nameReg"/>
+    </div>
+    <p class="notShow noCenter">！用户名必须是2—10个非特殊字符</p>
+
+    <div class="regBox" id="divP">
+      <label for="passReg">密码：</label>
+      <input type="password" name="pw" id="passReg"/>
+    </div>
+    <p class="notShow noCenter">！密码必须是6—20个非特殊字符</p>
+
+    <button onclick="reg(event)" type="button">注册</button>
+  </form>
+
+
+
+  <form id="formL">
+    <label for="nameLogin">用户：</label><input type="text" name="username" id="nameLogin"/><br/>
+    <label for="passLogin">密码：</label><input type="password" name="pw" id="passLogin"/><br/>
     <button onclick="login(event)">登录</button>
   </form>
-  <div>
-    <textarea id="talkBox" cols="30" rows="3" style="resize:none;vertical-align: bottom"></textarea>
-    <br/><button onclick="send()">发送</button>
-  </div>
-  <div id="showBox">
+
+  <div id="box2">
+    <button onclick="toggle() " id="toggle">切换到登录/注册</button>
+    <div>
+      <textarea id="talkBox" cols="30" rows="3" style="resize:none;vertical-align: bottom"></textarea>
+      <br/>
+      <button onclick="send()">发送</button>
+    </div>
+    <div id="showBox">
+    </div>
   </div>
 </div>
 <script>
@@ -43,15 +170,51 @@
   $(document).ready(getData())
 
 
+  function toggle() {
+    $('#formL').toggle()
+    $('#formR').toggle()
+  }
+
+  let formR = document.getElementById('formR')
+  let name = document.getElementById('nameReg')
+  let pass = document.getElementById('passReg')
+  let buttonR = formR.querySelector('button')
+
+  name.addEventListener('input', function () {
+      let valueN = name.value
+      if (!/^\w{2,10}$/.test(valueN)) {
+        $('#formR p').first().addClass('show')
+        console.log(buttonR)
+        buttonR.disabled = true
+      } else {
+        $('#formR p').first().removeClass('show').addClass('notShow')
+        buttonR.disabled = false
+      }
+    }
+  )
+  pass.addEventListener('input', function () {
+      let valueP = pass.value
+      if (!/^\w{6,20}$/.test(valueP)) {
+        $('#formR p').last().addClass('show')
+        buttonR.disabled = true
+      } else {
+        $('#formR p').last().removeClass('show').addClass('notShow')
+        buttonR.disabled = false
+      }
+    }
+  )
+
+
   function reg(event) {
 
     event.preventDefault();
+
 
     $.ajax({
       url: '/reg',
       type: "POST",
       dataType: 'json',
-      data: $('#form1').serialize(),
+      data: $('#formR').serialize(),
       success: function (res) {
         if (res["err"] == 0) {
           alert('注册成功')
@@ -74,7 +237,7 @@
       url: '/login',
       type: "POST",
       dataType: 'json',
-      data: $('#form1').serialize(),
+      data: $('#formL').serialize(),
       success: function (res) {
         console.log(res)
         if (res["err"] == 0) {
@@ -132,9 +295,11 @@
         success: function (res) {
           console.log(res)
           if (res["err"] == 0) {
-            alert('新加成功')
+            alert('留言成功')
             //更新数据
             getData();
+            //清空留言框
+            document.getElementById("talkBox").value=''
           } else {
             alert('添加评论失败')
           }
