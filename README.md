@@ -1,3 +1,4 @@
 # resume
+在终端运行 node server.js直接访问http://localhost:8080 就是主页。
 
-用node打开server.js服务器后直接访问http://localhost:8080就是主页。
+
