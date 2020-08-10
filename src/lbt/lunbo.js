@@ -69,7 +69,6 @@ left.onclick = function () {
   //如过不是在第一张那里点击这个左按钮，就直接减pic的值就可以移动一格
   pic--;
   animate(ul,-pic*imgWidth);
-
 };
 
 function animate(element, target) {

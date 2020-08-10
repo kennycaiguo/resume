@@ -240,7 +240,7 @@
       data: $('#formL').serialize(),
       success: function (res) {
         console.log(res)
-        if (res["err"] == 0) {
+        if (res["err"] === 0) {
           alert('登录成功，可以去留言了')
           sessionStorage.setItem("username", res["username"]);
         } else {

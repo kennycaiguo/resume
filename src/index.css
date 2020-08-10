@@ -70,11 +70,19 @@ nav li a:hover {
 }
 
 #info .box {
-  width: 80vw;
+  display: inline-block;
+  width: 100vw;
   height: 70vh;
-  margin: 0 10vw 0 10vw;
-  background-color: rgba(205, 255, 199, 0.54);
+  padding: 0 5vw;
   font-size: 16px;
+}
+
+
+#info .oneInfo{
+  background-color: rgba(205, 255, 199, 0.54);
+  padding: 0 5vw;
+  /*用margin就不能并列两个直接到后面去了*/
+
 }
 
 
